@@ -4,17 +4,23 @@ import { Navlinks } from "../data/navLinks";
 import { Menu, X } from "lucide-react";
 // STATES
 import { useState } from "react";
+// MOTION
+// eslint-disable-next-line no-unused-vars
+import { motion } from "motion/react";
 
 export default function Navbar() {
   const [isopen, setisopen] = useState(false);
 
   return (
-    <>
-      <header
+    <div>
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 w-full z-50 flex items-center justify-between
           px-6 py-3 md:px-8 md:py-4 shadow bg-white"
       >
-        <a href="#">
+        <a href="#home">
           <h1>icon?</h1>
         </a>
         <nav
@@ -22,6 +28,7 @@ export default function Navbar() {
         >
           {Navlinks.map((link) => (
             <a
+              onClick={() => setisopen(false)}
               key={link.name}
               className="hover:text-indigo-600"
               href={link.href}
@@ -45,7 +52,7 @@ export default function Navbar() {
             <Menu />
           </button>
         </div>
-      </header>
-    </>
+      </motion.header>
+    </div>
   );
 }

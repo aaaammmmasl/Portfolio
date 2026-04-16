@@ -4,5 +4,24 @@ html {
   scroll-behavior: smooth;
 }
 section {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 55px;
 }
+/* body {
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(99, 102, 241, 0.25),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(236, 72, 153, 0.2),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(34, 211, 238, 0.15),
+      transparent 50%
+    ),
+    #0b0f19;
+} */
