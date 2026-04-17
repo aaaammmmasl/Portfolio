@@ -1,19 +1,24 @@
-import { createContext, useContext, useState } from "react";
+import { Children, createContext, useContext } from "react";
 
 const ThemeContext = createContext();
 
-export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState({
-    primary: "#4f46e5", // indigo default
-  });
+const theme = {
+  colors: {
+    navbar: "black",
+    secondery: "#0f172a",
+    text: "#ffffff",
+    p: "gray",
+    background: "black",
+    card: "",
+  },
+};
 
+export const ThemeProvider = ({ children }) => {
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
   );
-}
-
-export function useTheme() {
+};
+// eslint-disable-next-line react-refresh/only-export-components
+export const useTheme = () => {
   return useContext(ThemeContext);
-}
+};

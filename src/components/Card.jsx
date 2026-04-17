@@ -4,8 +4,12 @@ import { useState, useEffect } from "react";
 import { Eye, ArrowLeft, ExternalLink } from "lucide-react";
 // motion
 import { motion, AnimatePresence } from "motion/react";
+// CONTEXT
+import { useTheme } from "../context/ThemeContext";
 
 export const Card = ({ project }) => {
+  // CONTEXT
+  const theme = useTheme();
   // STATE
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isOpen, setisOpen] = useState(false);
@@ -40,41 +44,54 @@ export const Card = ({ project }) => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.2 }}
         className="w-full"
-        >
-          <div
-        layoutId={project.title}
-        className="border border-gray-400 rounded-xl shadow-xl overflow-hidden transition-transform duration-200 ease-out cursor-pointer max-w-120 h-auto bg-white"
-        onMouseMove={handleMove}
-        onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-        style={{
-          transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-        }}
       >
-        <img
-          src={project.img}
-          alt={project.tilt}
-          className="w-full h-52 object-cover"
-        />
-        <h3 className="mt-3 px-4 pt-3 mb-1 text-lg font-semibold text-gray-800">
-          {project.title}
-        </h3>
-        <p className="text-sm px-4 pb-1 text-gray-600 w-5/6">{project.desc}</p>
-        <div className="flex flex-col justify-center items-center p-6 gap-2  py-2">
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex justify-center items-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 transition rounded-md px-7 h-11"
+        <div
+          layoutId={project.title}
+          className="border border-gray-400 rounded-xl shadow-xl overflow-hidden transition-transform duration-200 ease-out cursor-pointer max-w-120 h-auto "
+          onMouseMove={handleMove}
+          onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+          style={{
+            transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+            background: theme.colors.card,
+          }}
+        >
+          <img
+            src={project.img}
+            alt={project.tilt}
+            className="w-full h-52 object-cover"
+          />
+          <h3
+            // COLOR FROM CONTEXT
+            style={{ color: theme.colors.text }}
+            className="mt-3 px-4 pt-3 mb-1 text-lg font-semibold text-gray-800"
           >
-            <img className="w-6 " src="/icons/github.svg" /> link
-          </a>
-          <button
-            onClick={() => setisOpen(true)}
-            className="flex items-center justify-center gap-2 w-full border border-slate-600 active:scale-95 hover:bg-white/10 transition text-slate-600 rounded-md px-6 h-11"
+            {project.title}
+          </h3>
+          <p
+            // COLOR FROM CONTEXT
+            style={{ color: theme.colors.p }}
+            className="text-sm px-4 pb-1 text-gray-600 w-5/6"
           >
-            <Eye />
-            <span>view Details</span>
-          </button>
+            {project.desc}
+          </p>
+          <div className="flex flex-col justify-center items-center p-6 gap-2  py-2">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center items-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 transition rounded-md px-7 h-11"
+            >
+              <img className="w-6 " src="/icons/github.svg" /> link
+            </a>
+            <button
+              onClick={() => setisOpen(true)}
+              // COLOR FROM CONTEXT
+              style={{ color: theme.colors.text }}
+              className="flex items-center justify-center gap-2 w-full border border-slate-600 active:scale-95 hover:bg-white/10 transition text-slate-600 rounded-md px-6 h-11"
+            >
+              <Eye />
+              <span>view Details</span>
+            </button>
           </div>
         </div>
       </motion.div>

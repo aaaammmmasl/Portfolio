@@ -16,16 +16,16 @@ function App() {
   }, []);
   return (
     <>
-    <ThemeProvider>
-      {loading ? (
-        <Intro />
-      ) : (
-        <div>
-          <LenisScroll />
-          <Navbar />
-          <Home />
-        </div>
-      )}
+      <ThemeProvider>
+        {loading ? (
+          <Intro />
+        ) : (
+          <div>
+            <LenisScroll />
+            <Navbar />
+            <Home />
+          </div>
+        )}
       </ThemeProvider>
     </>
   );

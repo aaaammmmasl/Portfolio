@@ -1,8 +1,12 @@
+// CONTEXT
+import { useTheme } from "../context/ThemeContext";
+
 export default function Footer() {
+  const theme = useTheme();
   return (
     <footer
       id="contact"
-      className="flex flex-col bg-amber-50 items-center justify-around w-full py-16 text-sm text-gray-800/70 h-full"
+      className="border border-t-gray-950 mt-20 flex flex-col items-center justify-around w-full py-10 text-sm text-gray-800/70 h-full"
     >
       <div>
         <div className="flex items-center mb-2 gap-2.5 flex-1">
@@ -31,7 +35,11 @@ export default function Footer() {
             </svg>
           </div>
           <div>
-            <h4 className="text-base font-medium text-zinc-800 mb-0.5">
+            <h4
+              // COLOR FROM CONTEXT
+              style={{ color: theme.colors.p }}
+              className="text-base font-medium mb-0.5"
+            >
               Phone
             </h4>
             <p className="text-sm text-zinc-500 leading-relaxed">
@@ -65,10 +73,18 @@ export default function Footer() {
             </svg>
           </div>
           <div>
-            <h4 className="text-base font-medium text-zinc-800 mb-0.5">
+            <h4
+              // COLOR FROM CONTEXT
+              style={{ color: theme.colors.p }}
+              className="text-base font-medium text-zinc-800 mb-0.5"
+            >
               Email
             </h4>
-            <p className="text-sm text-zinc-500 leading-relaxed">
+            <p
+              // COLOR FROM CONTEXT
+              style={{ color: theme.colors.p }}
+              className="text-sm text-zinc-500 leading-relaxed"
+            >
               kerchaouiamin06@gmail.com
             </p>
           </div>
@@ -128,7 +144,11 @@ export default function Footer() {
           </svg>
         </a>
       </div>
-      <p className="mt-8 text-center">
+      <p
+        // COLOR FROM CONTEXT
+        style={{ color: theme.colors.p }}
+        className="mt-8 text-center"
+      >
         © 2026 Amin Kerchaoui. Built with React.
       </p>
     </footer>
