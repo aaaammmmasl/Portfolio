@@ -175,7 +175,7 @@ export default function Home() {
           x={-1}
           y={-1}
           className={cn(
-            "absolute inset-0 opacity-60 pointer-events-none",
+            "absolute inset-0 pointer-events-none",
             "[mask-image:linear-gradient(to_top_left,white,transparent)]",
             "[-webkit-mask-image:linear-gradient(to_top_left,white,transparent)]",
           )}
