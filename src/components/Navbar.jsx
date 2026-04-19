@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 // STATES
 import { useState } from "react";
 // MOTION
+// eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 // UI
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";

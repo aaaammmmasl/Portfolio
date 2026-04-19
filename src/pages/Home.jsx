@@ -40,7 +40,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-background">
+    <div className="pt-12 bg-background">
       {/* HERO */}
       <div className="relative">
         <motion.div
@@ -156,7 +156,13 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-foreground py-7 px-24 text-center max-w-6xl mx-auto"
           >
-            I'm a passionate developer currently in my final year...
+            I'm a passionate developer currently in my final year at private
+          school groupe IKI, where I learned C# programming, database
+          management, and networking fundamentals. Later, I transitioned into
+          web development and learned HTML, CSS, JavaScript, and React.
+          Currently, I'm building real projects to strengthen my skills while
+          gradually exploring cloud technologies and system fundamentals, with
+          the goal of becoming a professional Cloud Engineer.
           </motion.p>
         </section>
       </div>
