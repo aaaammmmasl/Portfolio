@@ -4,40 +4,38 @@ import { useState, useEffect } from "react";
 import { Eye, ArrowLeft, ExternalLink } from "lucide-react";
 // motion
 import { motion, AnimatePresence } from "motion/react";
-// CONTEXT
-import { useTheme } from "../context/ThemeContext";
+// BACKGROUND
+import { cn } from "@/lib/utils";
+import { GridPattern } from "@/components/ui/grid-pattern";
 
 export const Card = ({ project }) => {
-  // CONTEXT
-  const theme = useTheme();
-  // STATE
+
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isOpen, setisOpen] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    return () => (document.body.style.overflow = "auto");
   }, [isOpen]);
 
-  // Adjust the threshold value to control the tilt effect
   const threshold = 12;
 
   const handleMove = (e) => {
     const { left, top, width, height } =
       e.currentTarget.getBoundingClientRect();
+
     const x = (e.clientX - left) / width - 0.5;
     const y = (e.clientY - top) / height - 0.5;
-    setTilt({ x: y * -threshold, y: x * threshold });
+
+    setTilt({
+      x: y * -threshold,
+      y: x * threshold,
+    });
   };
 
   return (
     <>
+      {/* CARD */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -47,47 +45,45 @@ export const Card = ({ project }) => {
       >
         <div
           layoutId={project.title}
-          className="border border-gray-400 rounded-xl shadow-xl overflow-hidden transition-transform duration-200 ease-out cursor-pointer max-w-120 h-auto "
           onMouseMove={handleMove}
           onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+          className="bg-background border border-gray-400 rounded-xl shadow-xl overflow-hidden cursor-pointer max-w-120 h-auto"
           style={{
             transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-            background: theme.colors.card,
           }}
         >
           <img
             src={project.img}
-            alt={project.tilt}
+            alt={project.title}
             className="w-full h-52 object-cover"
           />
+
           <h3
-            // COLOR FROM CONTEXT
-            style={{ color: theme.colors.text }}
-            className="mt-3 px-4 pt-3 mb-1 text-lg font-semibold text-gray-800"
+            className="text-foreground mt-3 px-4 pt-3 mb-1 text-lg font-semibold"
           >
             {project.title}
           </h3>
+
           <p
-            // COLOR FROM CONTEXT
-            style={{ color: theme.colors.p }}
-            className="text-sm px-4 pb-1 text-gray-600 w-5/6"
+            className="text-foreground text-sm px-4 pb-1 w-5/6"
           >
             {project.desc}
           </p>
-          <div className="flex flex-col justify-center items-center p-6 gap-2  py-2">
+
+          <div className="flex flex-col items-center p-6 gap-2">
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
               className="flex justify-center items-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 transition rounded-md px-7 h-11"
             >
-              <img className="w-6 " src="/icons/github.svg" /> link
+              <img className="w-6" src="/icons/github.svg" />
+              link
             </a>
+
             <button
               onClick={() => setisOpen(true)}
-              // COLOR FROM CONTEXT
-              style={{ color: theme.colors.text }}
-              className="flex items-center justify-center gap-2 w-full border border-slate-600 active:scale-95 hover:bg-white/10 transition text-slate-600 rounded-md px-6 h-11"
+              className="text-foreground flex items-center justify-center gap-2 w-full border border-slate-600 active:scale-95 hover:bg-white/10 transition rounded-md px-6 h-11"
             >
               <Eye />
               <span>view Details</span>
@@ -95,6 +91,7 @@ export const Card = ({ project }) => {
           </div>
         </div>
       </motion.div>
+
       {/* MODAL */}
       <AnimatePresence>
         {isOpen && (
@@ -103,70 +100,111 @@ export const Card = ({ project }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="flex flex-col fixed inset-0 z-50 bg-black/60"
+            className="fixed inset-0 z-50 bg-black/60 flex"
           >
-            <div className="bg-gray-100">
-              <button
-                onClick={() => {
-                  setisOpen(false);
-                }}
-                type="button"
-                className="flex items-center mb-4 gap-2.5 border border-gray-500/30 px-4 py-2 text-sm text-gray-800 rounded bg-white hover:text-pink-500/70 hover:bg-pink-500/10 hover:border-pink-500/30 active:scale-95 transition"
-              >
-                <ArrowLeft />
-                Back
-              </button>
-            </div>
-            <div className="flex  w-full min-h-screen bg-gray-100 overflow-y-auto">
-              <div className=" h-screen w-full px-4">
-                <h1 className="pl-3 text-2xl pt-5">{project.title}</h1>
-                <hr className="mt-2" />
-                <p className="pl-3 mt-2">{project.details}</p>
-                {project.liveDemo && project.liveDemo.trim() !== "" && (
-                  <a
-                    href={project.liveDemo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    type="button"
-                    className="flex items-center gap-2 mt-4 px-6 py-2 active:scale-95 transition bg-fuchsia-800 rounded text-white shadow-lg shadow-blue-500/30 text-sm font-medium w-fit"
-                  >
-                    Live Demo
-                    <ExternalLink />
-                  </a>
+            {/* BACKGROUND */}
+            <div
+              className="bg-background fixed inset-0"
+            >
+              <GridPattern
+                width={140}
+                height={140}
+                x={-1}
+                y={-1}
+                className={cn(
+                  "absolute inset-0 pointer-events-none opacity-80",
+                  "[mask-image:linear-gradient(to_top_right,white,transparent)]",
                 )}
+              />
 
-                <h3 className="text-xl mt-6">Technologies Used</h3>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {project.tech.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="text-sm text-blue-800 bg-blue-400/10 border border-indigo-200 rounded-full px-4 py-1 hover:scale-95 cursor-pointer"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+              {/* TOP BAR */}
+              <div className="p-4">
+                <button
+                  onClick={() => setisOpen(false)}
+                  className="text-foreground flex items-center gap-2 border border-slate-600 hover:bg-white/10 transition rounded-md px-6 h-11"
+                >
+                  <ArrowLeft />
+                  Back
+                </button>
               </div>
-              {/* SECOND HALF */}
-              <div className=" h-screen w-full px-6">
-                <img
-                  src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/gallery/slide2.png"
-                  className="w-full"
-                />
-                <div className="  border w-full mt-6 p-6">
-                  <h2 className="text-xl">Features</h2>
-                  {project.features.map((feature, i) => (
-                    <p key={i} className="text-sm">
-                      {feature}
-                    </p>
-                  ))}
+
+              {/* CONTENT */}
+              <div className="flex w-full min-h-screen overflow-y-auto">
+                {/* LEFT */}
+                <div className="w-full px-6 lg:px-10">
+                  <h1
+                    className="text-foreground text-2xl pt-5"
+                  >
+                    {project.title}
+                  </h1>
+
+                  <hr className="mt-2" />
+
+                  <p className="text-foreground mt-2">
+                    {project.details}
+                  </p>
+
+                  {project.liveDemo && (
+                    <a
+                      href={project.liveDemo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded px-6 py-2 w-fit mt-4"
+                    >
+                      Live Demo
+                      <ExternalLink />
+                    </a>
+                  )}
+
+                  <h3
+                    className="text-foreground text-xl mt-6"
+                  >
+                    Technologies Used
+                  </h3>
+
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {project.tech.map((skill, i) => (
+                      <span
+                        key={i}
+                        className="text-foreground bg-background border border-border/30 text-sm rounded-full px-4 py-1 hover:scale-95 transition cursor-pointer"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* RIGHT */}
+                <div className="w-full px-6 lg:px-10">
+                  <img
+                    src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/gallery/slide2.png"
+                    className="w-full"
+                  />
+
+                  <div
+                    className="bg-background border mt-6 p-6"
+                  >
+                    <h2
+                      className="text-foreground text-xl"
+                    >
+                      Features
+                    </h2>
+
+                    {project.features.map((feature, i) => (
+                      <p
+                        key={i}
+                        className="text-foregroundtext-sm"
+                      >
+                        {feature}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-      {/* =================MODAL==================== */}
     </>
   );
 };

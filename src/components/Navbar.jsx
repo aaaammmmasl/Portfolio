@@ -5,61 +5,64 @@ import { Menu, X } from "lucide-react";
 // STATES
 import { useState } from "react";
 // MOTION
-// eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-// CONTEXT
-import { useTheme } from "../context/ThemeContext";
+// UI
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 export default function Navbar() {
-  // CONTEXT
-  const theme = useTheme();
-  // STATE
   const [isopen, setisopen] = useState(false);
 
   return (
-    <div>
-      <motion.header
-        style={{ background: theme.colors.navbar }}
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="border border-be-gray-950 fixed top-0 w-full z-50 flex items-center justify-between
-          px-6 py-3 md:px-8 md:py-4 shadow"
-      >
-        <a href="#home">
-          <h1>icon?</h1>
-        </a>
-        <nav
-          className={`${isopen ? "max-md:w-full bg-gray-200/75" : "max-md:w-0"} z-50 max-md:absolute  max-md:top-0 max-md:right-0 max-md:overflow-hidden items-center justify-center max-md:h-screen transition-[width] backdrop-blur flex-col md:flex-row flex gap-8 text-gray-900 text-sm font-normal`}
-        >
-          {Navlinks.map((link) => (
-            <a
-              style={{ color: theme.colors.text }}
-              onClick={() => setisopen(false)}
-              key={link.name}
-              className="hover:text-indigo-600"
-              href={link.href}
-            >
-              {link.name}
-            </a>
-          ))}
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="bg-background fixed top-0 w-full z-50 flex items-center justify-around
+      px-6 py-3 md:px-8 md:py-4 shadow"
+    >
+      {/* LOGO */}
+      <a href="#home" className="text-foreground">
+        <h1>icon?</h1>
+      </a>
 
-          <button
+      {/* NAV LINKS */}
+      <nav
+        className={`${
+          isopen ? "max-md:w-full" : "max-md:w-0"
+        } bg-background z-50 max-md:absolute max-md:top-0 max-md:right-0 max-md:h-screen max-md:overflow-hidden
+        flex flex-col md:flex-row items-center justify-center gap-8
+        transition-[width] backdrop-blur`}
+      >
+        {Navlinks.map((link) => (
+          <a
+            key={link.name}
+            href={link.href}
             onClick={() => setisopen(false)}
-            className="md:hidden text-gray-600"
+            className="text-foreground hover:text-indigo-500 transition"
           >
-            <X />
-          </button>
-        </nav>
-        <div className="flex items-center space-x-4">
-          <button
-            className="md:hidden text-gray-600"
-            onClick={() => setisopen(true)}
-          >
-            <Menu />
-          </button>
-        </div>
-      </motion.header>
-    </div>
+            {link.name}
+          </a>
+        ))}
+
+        {/* CLOSE BUTTON (mobile) */}
+        <button
+          onClick={() => setisopen(false)}
+          className="text-foreground md:hidden"
+        >
+          <X />
+        </button>
+      </nav>
+
+      {/* THEME TOGGLE */}
+      <AnimatedThemeToggler />
+
+      {/* MOBILE MENU BUTTON */}
+      <button
+        className="text-foreground md:hidden"
+        onClick={() => setisopen(true)}
+      >
+        <Menu />
+      </button>
+    </motion.header>
   );
 }

@@ -1,12 +1,8 @@
-// CONTEXT
-import { useTheme } from "../context/ThemeContext";
-
-export default function Footer() {
-  const theme = useTheme();
+  export default function Footer() {
   return (
     <footer
       id="contact"
-      className="border border-t-gray-950 mt-20 flex flex-col items-center justify-around w-full py-10 text-sm text-gray-800/70 h-full"
+      className=" mt-20 flex flex-col items-center justify-around w-full py-10 text-sm text-gray-800/70 h-full"
     >
       <div>
         <div className="flex items-center mb-2 gap-2.5 flex-1">
@@ -37,8 +33,7 @@ export default function Footer() {
           <div>
             <h4
               // COLOR FROM CONTEXT
-              style={{ color: theme.colors.p }}
-              className="text-base font-medium mb-0.5"
+              className="text-foreground text-base font-medium mb-0.5"
             >
               Phone
             </h4>
@@ -75,15 +70,14 @@ export default function Footer() {
           <div>
             <h4
               // COLOR FROM CONTEXT
-              style={{ color: theme.colors.p }}
-              className="text-base font-medium text-zinc-800 mb-0.5"
+              className="text-foreground text-base font-medium mb-0.5"
             >
               Email
             </h4>
             <p
               // COLOR FROM CONTEXT
-              style={{ color: theme.colors.p }}
-              className="text-sm text-zinc-500 leading-relaxed"
+
+              className="text-foreground text-sm leading-relaxed"
             >
               kerchaouiamin06@gmail.com
             </p>
@@ -146,8 +140,7 @@ export default function Footer() {
       </div>
       <p
         // COLOR FROM CONTEXT
-        style={{ color: theme.colors.p }}
-        className="mt-8 text-center"
+        className="text-foreground mt-8 text-center"
       >
         © 2026 Amin Kerchaoui. Built with React.
       </p>

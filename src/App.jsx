@@ -4,7 +4,8 @@ import Home from "./pages/Home";
 import LenisScroll from "./components/LenisScroll";
 import { useState, useEffect } from "react";
 import Intro from "./components/Intro";
-import { ThemeProvider } from "./context/ThemeContext";
+
+// BACKGROUND
 
 function App() {
   const [loading, setloading] = useState(true);
@@ -15,19 +16,17 @@ function App() {
     }, 5000);
   }, []);
   return (
-    <>
-      <ThemeProvider>
-        {loading ? (
+    <div>
+        {/* {loading ? (
           <Intro />
-        ) : (
-          <div>
-            <LenisScroll />
-            <Navbar />
-            <Home />
-          </div>
-        )}
-      </ThemeProvider>
-    </>
+        ) : ( */}
+        <div>
+          <LenisScroll />
+          <Navbar />
+          <Home />
+        </div>
+        {/* )} */}
+    </div>
   );
 }
 
