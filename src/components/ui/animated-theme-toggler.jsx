@@ -55,7 +55,7 @@ export const AnimatedThemeToggler = ({
     }
 
     const transition = document.startViewTransition(() => {
-      flushSync(applyTheme);
+      applyTheme();
     });
 
     const ready = transition?.ready;

@@ -1,10 +1,10 @@
-  export default function Footer() {
+export default function Footer() {
   return (
     <footer
       id="contact"
-      className=" mt-20 flex flex-col items-center justify-around w-full py-10 text-sm text-gray-800/70 h-full"
+      className="z-20 mt-20 flex flex-col items-center justify-around w-full pb-4 text-sm text-gray-800/70 h-full"
     >
-      <div>
+      <div >
         <div className="flex items-center mb-2 gap-2.5 flex-1">
           <div className="size-8 rounded-lg  border border-zinc-200 flex items-center justify-center">
             <svg
@@ -77,7 +77,7 @@
             <p
               // COLOR FROM CONTEXT
 
-              className="text-foreground text-sm leading-relaxed"
+              className="text-paragraph text-sm leading-relaxed"
             >
               kerchaouiamin06@gmail.com
             </p>

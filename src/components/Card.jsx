@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import { GridPattern } from "@/components/ui/grid-pattern";
 
 export const Card = ({ project }) => {
-
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isOpen, setisOpen] = useState(false);
 
@@ -43,53 +42,52 @@ export const Card = ({ project }) => {
         viewport={{ once: true, amount: 0.2 }}
         className="w-full"
       >
-        <div
-          layoutId={project.title}
-          onMouseMove={handleMove}
-          onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-          className="bg-background border border-gray-400 rounded-xl shadow-xl overflow-hidden cursor-pointer max-w-120 h-auto"
-          style={{
-            transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-          }}
-        >
-          <img
-            src={project.img}
-            alt={project.title}
-            className="w-full h-52 object-cover"
-          />
-
-          <h3
-            className="text-foreground mt-3 px-4 pt-3 mb-1 text-lg font-semibold"
+        {/* layoutId ONLY wrapper (IMPORTANT FIX) */}
+        <motion.div layoutId={project.title} className="w-full">
+          {/* actual interactive card */}
+          <div
+            onMouseMove={handleMove}
+            onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+            className="bg-background border border-gray-400 rounded-xl shadow-xl overflow-hidden cursor-pointer max-w-120 h-auto"
+            style={{
+              transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+            }}
           >
-            {project.title}
-          </h3>
+            <img
+              src={project.img}
+              alt={project.title}
+              className="w-full h-52 object-cover"
+            />
 
-          <p
-            className="text-foreground text-sm px-4 pb-1 w-5/6"
-          >
-            {project.desc}
-          </p>
+            <h3 className="text-foreground mt-3 px-4 pt-3 mb-1 text-lg font-semibold">
+              {project.title}
+            </h3>
 
-          <div className="flex flex-col items-center p-6 gap-2">
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex justify-center items-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 transition rounded-md px-7 h-11"
-            >
-              <img className="w-6" src="/icons/github.svg" />
-              link
-            </a>
+            <p className="text-paragraph text-sm px-4 pb-1 w-5/6">
+              {project.desc}
+            </p>
 
-            <button
-              onClick={() => setisOpen(true)}
-              className="text-foreground flex items-center justify-center gap-2 w-full border border-slate-600 active:scale-95 hover:bg-white/10 transition rounded-md px-6 h-11"
-            >
-              <Eye />
-              <span>view Details</span>
-            </button>
+            <div className="flex flex-col items-center p-6 gap-2">
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex justify-center items-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 transition rounded-md px-7 h-11"
+              >
+                <img className="w-6" src="/icons/github.svg" />
+                link
+              </a>
+
+              <button
+                onClick={() => setisOpen(true)}
+                className="text-foreground flex items-center justify-center gap-2 w-full border border-slate-600 active:scale-95 hover:bg-white/10 transition rounded-md px-6 h-11"
+              >
+                <Eye />
+                <span>view Details</span>
+              </button>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
 
       {/* MODAL */}
@@ -103,9 +101,7 @@ export const Card = ({ project }) => {
             className="fixed inset-0 z-50 bg-black/60 flex"
           >
             {/* BACKGROUND */}
-            <div
-              className="bg-background fixed inset-0"
-            >
+            <div className="bg-background fixed inset-0">
               <GridPattern
                 width={140}
                 height={140}
@@ -113,7 +109,7 @@ export const Card = ({ project }) => {
                 y={-1}
                 className={cn(
                   "absolute inset-0 pointer-events-none opacity-80",
-                  "[mask-image:linear-gradient(to_top_right,white,transparent)]",
+                  "[mask-image:linear-gradient(to_top_right,white,transparent)]"
                 )}
               />
 
@@ -132,9 +128,7 @@ export const Card = ({ project }) => {
               <div className="flex w-full min-h-screen overflow-y-auto">
                 {/* LEFT */}
                 <div className="w-full px-6 lg:px-10">
-                  <h1
-                    className="text-foreground text-2xl pt-5"
-                  >
+                  <h1 className="text-foreground text-2xl pt-5">
                     {project.title}
                   </h1>
 
@@ -156,9 +150,7 @@ export const Card = ({ project }) => {
                     </a>
                   )}
 
-                  <h3
-                    className="text-foreground text-xl mt-6"
-                  >
+                  <h3 className="text-foreground text-xl mt-6">
                     Technologies Used
                   </h3>
 
@@ -181,20 +173,13 @@ export const Card = ({ project }) => {
                     className="w-full"
                   />
 
-                  <div
-                    className="bg-background border mt-6 p-6"
-                  >
-                    <h2
-                      className="text-foreground text-xl"
-                    >
+                  <div className="bg-background border mt-6 p-6">
+                    <h2 className="text-foreground text-xl">
                       Features
                     </h2>
 
                     {project.features.map((feature, i) => (
-                      <p
-                        key={i}
-                        className="text-foregroundtext-sm"
-                      >
+                      <p key={i} className="text-foreground text-sm">
                         {feature}
                       </p>
                     ))}
