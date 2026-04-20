@@ -42,13 +42,12 @@ export const Card = ({ project }) => {
         viewport={{ once: true, amount: 0.2 }}
         className="w-full"
       >
-        {/* layoutId ONLY wrapper (IMPORTANT FIX) */}
         <motion.div layoutId={project.title} className="w-full">
           {/* actual interactive card */}
           <div
             onMouseMove={handleMove}
             onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-            className="bg-background border border-gray-400 rounded-xl shadow-xl overflow-hidden cursor-pointer max-w-120 h-auto"
+            className="bg-background border border-gray-400 rounded-xl shadow-xl overflow-hidden transition-transform duration-200 ease-out cursor-pointer max-w-120 h-auto"
             style={{
               transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
             }}
@@ -91,6 +90,7 @@ export const Card = ({ project }) => {
       </motion.div>
 
       {/* MODAL */}
+      {/* MODAL */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -98,43 +98,51 @@ export const Card = ({ project }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/60 flex"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4"
           >
-            {/* BACKGROUND */}
-            <div className="bg-background fixed inset-0">
-              <GridPattern
-                width={140}
-                height={140}
-                x={-1}
-                y={-1}
-                className={cn(
-                  "absolute inset-0 pointer-events-none opacity-80",
-                  "[mask-image:linear-gradient(to_top_right,white,transparent)]"
-                )}
-              />
+            {/* CARD MODAL */}
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-2xl border border-border/40 bg-background shadow-2xl"
+            >
+              {/* HEADER IMAGE */}
+              <div className="relative h-64 w-full overflow-hidden">
+                <img
+                  src={project.img}
+                  className="h-full w-full object-cover scale-105"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/40 to-transparent" />
 
-              {/* TOP BAR */}
-              <div className="p-4">
+                {/* CLOSE BUTTON */}
                 <button
                   onClick={() => setisOpen(false)}
-                  className="text-foreground flex items-center gap-2 border border-slate-600 hover:bg-white/10 transition rounded-md px-6 h-11"
+                  className="absolute top-4 right-4 bg-background/70 hover:bg-background border border-border/40 text-foreground px-4 py-2 rounded-full backdrop-blur-md transition"
                 >
-                  <ArrowLeft />
-                  Back
+                  ✕
                 </button>
-              </div>
 
-              {/* CONTENT */}
-              <div className="flex w-full min-h-screen overflow-y-auto">
-                {/* LEFT */}
-                <div className="w-full px-6 lg:px-10">
-                  <h1 className="text-foreground text-2xl pt-5">
+                {/* TITLE */}
+                <div className="absolute bottom-4 left-6">
+                  <h1 className="text-2xl md:text-3xl font-semibold text-foreground">
                     {project.title}
                   </h1>
+                  <p className="text-sm text-paragraph mt-1">
+                    Project details overview
+                  </p>
+                </div>
+              </div>
 
-                  <hr className="mt-2" />
-
-                  <p className="text-foreground mt-2">
+              {/* BODY */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
+                {/* LEFT */}
+                <div>
+                  <h2 className="text-lg font-semibold text-foreground mb-2">
+                    Description
+                  </h2>
+                  <p className="text-paragraph text-sm leading-relaxed">
                     {project.details}
                   </p>
 
@@ -143,50 +151,48 @@ export const Card = ({ project }) => {
                       href={project.liveDemo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded px-6 py-2 w-fit mt-4"
+                      className="inline-flex items-center gap-2 mt-5 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg transition"
                     >
-                      Live Demo
-                      <ExternalLink />
+                      Live Demo <ExternalLink size={16} />
                     </a>
                   )}
+                </div>
 
-                  <h3 className="text-foreground text-xl mt-6">
-                    Technologies Used
-                  </h3>
+                {/* RIGHT */}
+                <div>
+                  <h2 className="text-lg font-semibold text-foreground mb-2">
+                    Technologies
+                  </h2>
 
-                  <div className="flex flex-wrap gap-2 mt-2">
+                  <div className="flex flex-wrap gap-2">
                     {project.tech.map((skill, i) => (
                       <span
                         key={i}
-                        className="text-foreground bg-background border border-border/30 text-sm rounded-full px-4 py-1 hover:scale-95 transition cursor-pointer"
+                        className="text-sm px-3 py-1 rounded-full border border-border/40 bg-background hover:scale-105 transition"
                       >
                         {skill}
                       </span>
                     ))}
                   </div>
-                </div>
 
-                {/* RIGHT */}
-                <div className="w-full px-6 lg:px-10">
-                  <img
-                    src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/gallery/slide2.png"
-                    className="w-full"
-                  />
+                  <h2 className="text-lg font-semibold text-foreground mt-6 mb-2">
+                    Features
+                  </h2>
 
-                  <div className="bg-background border mt-6 p-6">
-                    <h2 className="text-foreground text-xl">
-                      Features
-                    </h2>
-
+                  <div className="space-y-2">
                     {project.features.map((feature, i) => (
-                      <p key={i} className="text-foreground text-sm">
+                      <div
+                        key={i}
+                        className="text-sm text-paragraph flex gap-2"
+                      >
+                        <span className="text-indigo-500">•</span>
                         {feature}
-                      </p>
+                      </div>
                     ))}
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

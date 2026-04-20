@@ -84,7 +84,7 @@ export default function Home() {
                 initial={{ y: 40, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                className="text-paragraph text-center md:text-left text-sm max-w-lg mt-2"
+                className="text-paragraph text-center md:text-left text-sm max-w-lg pt-6"
               >
                 I create responsive and interactive web applications using React
                 and Tailwind. <br />
@@ -101,14 +101,14 @@ export default function Home() {
               >
                 <a
                   href="#contact"
-                  className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 transition rounded-md px-7 h-11"
+                  className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 transition-transform duration-75 rounded-md px-7 h-11"
                 >
                   Contact Me
                 </a>
 
                 <a
                   href="#projects"
-                  className="text-foreground flex items-center gap-2 border border-slate-600 hover:bg-white/10 transition rounded-md px-6 h-11"
+                  className="text-foreground flex items-center gap-2 border border-slate-600 active:scale-95 transform hover:bg-white/10 transition rounded-md px-6 h-11"
                 >
                   <Eye />
                   <span>view project</span>
@@ -165,7 +165,7 @@ export default function Home() {
         </section>
       </div>
       {/* SKILLS */}
-      <div className="relative">
+      <div className="relative md:mt-5">
         <GridPattern
           width={140}
           height={140}
