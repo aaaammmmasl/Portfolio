@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import { Eye, ArrowLeft, ExternalLink } from "lucide-react";
 // motion
 import { motion, AnimatePresence } from "motion/react";
-// BACKGROUND
-import { cn } from "@/lib/utils";
-import { GridPattern } from "@/components/ui/grid-pattern";
+// features component
+import ShinyText from "../AnimatedComponents.jsx/ShinyText";
 
 export const Card = ({ project }) => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -89,7 +88,6 @@ export const Card = ({ project }) => {
         </motion.div>
       </motion.div>
 
-      {/* MODAL */}
       {/* MODAL */}
       <AnimatePresence>
         {isOpen && (
@@ -176,7 +174,18 @@ export const Card = ({ project }) => {
                   </div>
 
                   <h2 className="text-lg font-semibold text-foreground mt-6 mb-2">
-                    Features
+                    <ShinyText
+                      text="✨ FEATURES"
+                      speed={2}
+                      delay={0}
+                      color="#b5b5b5"
+                      shineColor="#2c4bd2"
+                      spread={120}
+                      direction="left"
+                      yoyo={false}
+                      pauseOnHover={false}
+                      disabled={false}
+                    />
                   </h2>
 
                   <div className="space-y-2">
