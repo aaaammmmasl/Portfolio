@@ -23,7 +23,6 @@ export default function Navbar() {
     >
       {/* LOGO */}
       <a href="#home" className="text-foreground">
-        <h1>icon?</h1>
       </a>
 
       {/* NAV LINKS */}

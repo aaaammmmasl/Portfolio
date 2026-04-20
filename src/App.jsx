@@ -17,15 +17,15 @@ function App() {
   }, []);
   return (
     <div>
-        {/* {loading ? (
+        {loading ? (
           <Intro />
-        ) : ( */}
+        ) : (
         <div>
           <LenisScroll />
           <Navbar />
           <Home />
         </div>
-        {/* )} */}
+        )} 
     </div>
   );
 }
