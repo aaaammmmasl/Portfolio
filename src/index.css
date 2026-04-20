@@ -7,9 +7,22 @@
 
 html {
   scroll-behavior: smooth;
+  view-transition-name: root;
 }
 section {
   scroll-margin-top: 55px;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
 }
 
 @theme inline {
@@ -46,6 +59,7 @@ section {
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+  --color-paragraph: var(--paragraph);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -58,6 +72,7 @@ section {
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  --paragraph: oklch(0.556 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --border: #e2e8f0;
@@ -94,6 +109,7 @@ section {
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
+  --paragraph: oklch(70.067% 0.01529 17.238);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --border: #334155;

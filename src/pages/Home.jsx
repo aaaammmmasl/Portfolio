@@ -55,9 +55,7 @@ export default function Home() {
             x={-1}
             y={-1}
             className={cn(
-              "absolute inset-0 pointer-events-none",
-              "[mask-image:linear-gradient(to_bottom_right,white,transparent)]",
-              "[-webkit-mask-image:linear-gradient(to_bottom_right,white,transparent)]",
+              "z-0 [mask-image:linear-gradient(to_bottom_left,white,white,transparent,transparent)]",
             )}
           />
         </motion.div>
@@ -65,7 +63,7 @@ export default function Home() {
         <section id="home">
           <main className="flex flex-col md:flex-row gap-10 md:gap-20 pb-20 items-center pt-20 px-4 md:px-16 lg:px-24 xl:px-32 max-w-7xl mx-auto">
             {/* TEXTS */}
-            <div className="flex flex-col items-center md:items-start md:w-2/3">
+            <div className="z-20 flex flex-col items-center md:items-start md:w-2/3">
               <motion.div initial="hidden" animate="show">
                 {lines.map((line, i) => (
                   <motion.h1
@@ -86,7 +84,7 @@ export default function Home() {
                 initial={{ y: 40, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                className="text-foreground text-center md:text-left text-sm max-w-lg mt-2"
+                className="text-paragraph text-center md:text-left text-sm max-w-lg pt-6"
               >
                 I create responsive and interactive web applications using React
                 and Tailwind. <br />
@@ -103,14 +101,14 @@ export default function Home() {
               >
                 <a
                   href="#contact"
-                  className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 transition rounded-md px-7 h-11"
+                  className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95 transition-transform duration-75 rounded-md px-7 h-11"
                 >
                   Contact Me
                 </a>
 
                 <a
                   href="#projects"
-                  className="text-foreground flex items-center gap-2 border border-slate-600 hover:bg-white/10 transition rounded-md px-6 h-11"
+                  className="text-foreground flex items-center gap-2 border border-slate-600 active:scale-95 transform hover:bg-white/10 transition rounded-md px-6 h-11"
                 >
                   <Eye />
                   <span>view project</span>
@@ -154,35 +152,32 @@ export default function Home() {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-foreground py-7 px-24 text-center max-w-6xl mx-auto"
+            className="text-paragraph py-7 px-24 text-center max-w-6xl mx-auto"
           >
             I'm a passionate developer currently in my final year at private
-          school groupe IKI, where I learned C# programming, database
-          management, and networking fundamentals. Later, I transitioned into
-          web development and learned HTML, CSS, JavaScript, and React.
-          Currently, I'm building real projects to strengthen my skills while
-          gradually exploring cloud technologies and system fundamentals, with
-          the goal of becoming a professional Cloud Engineer.
+            school groupe IKI, where I learned C# programming, database
+            management, and networking fundamentals. Later, I transitioned into
+            web development and learned HTML, CSS, JavaScript, and React.
+            Currently, I'm building real projects to strengthen my skills while
+            gradually exploring cloud technologies and system fundamentals, with
+            the goal of becoming a professional Cloud Engineer.
           </motion.p>
         </section>
       </div>
-
       {/* SKILLS */}
-      <div className="relative">
+      <div className="relative md:mt-5">
         <GridPattern
           width={140}
           height={140}
           x={-1}
           y={-1}
           className={cn(
-            "absolute inset-0 pointer-events-none",
-            "[mask-image:linear-gradient(to_top_left,white,transparent)]",
-            "[-webkit-mask-image:linear-gradient(to_top_left,white,transparent)]",
+            "[mask-image:linear-gradient(to_top_right,white,white,transparent,transparent)]",
           )}
         />
 
-        <section id="skills" className="lg:mt-22">
-          <h1 className="text-foreground sm:pt-12 text-3xl font-semibold text-center">
+        <section id="skills" className="relative z-20 lg:mt-22">
+          <h1 className=" text-foreground sm:pt-12 text-3xl font-semibold text-center">
             SKILLS
           </h1>
 
@@ -197,7 +192,7 @@ export default function Home() {
               <motion.div
                 key={skill.name}
                 variants={item}
-                className="border-border flex items-center justify-center p-4 border rounded-lg hover:scale-105 transition"
+                className="bg-background border-borde flex items-center justify-center p-4 border rounded-lg hover:scale-105 transition"
                 style={{
                   width: 100,
                   height: 100,
@@ -217,9 +212,8 @@ export default function Home() {
 
           <ProjectSection />
         </section>
-
-        <Footer />
-      </div>
+      </div>{" "}
+      <Footer />
     </div>
   );
 }
