@@ -67,7 +67,7 @@ export const Card = ({ project }) => {
             <img
               src={project.img}
               alt={project.title}
-              className="w-full h-52 object-cover"
+              className="w-full h-52 object-contain"
             />
 
             <h3 className="text-foreground mt-3 px-4 pt-3 mb-1 text-lg font-semibold">
@@ -171,6 +171,12 @@ export const Card = ({ project }) => {
                     >
                       Live Demo <ExternalLink size={16} />
                     </a>
+                  )}
+                  {project.note && (
+                    <div className="mt-4 flex items-start gap-2 rounded-md border border-red-500/40 bg-red-500/10 px-4 py-3 text-red-400">
+                      <span className="text-red-500 font-bold">⚠</span>
+                      <p className="text-sm leading-relaxed">NOTE : {project.note}</p>
+                    </div>
                   )}
                 </div>
 
