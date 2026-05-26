@@ -1,5 +1,4 @@
 import Navbar from "./components/Navbar";
-import "./App.css";
 import Home from "./pages/Home";
 import LenisScroll from "./components/LenisScroll";
 import { useState, useEffect } from "react";
@@ -17,15 +16,15 @@ function App() {
   }, []);
   return (
     <div>
-        {loading ? (
-          <Intro />
-        ) : (
+      {loading ? (
+        <Intro />
+      ) : (
         <div>
           <LenisScroll />
           <Navbar />
           <Home />
         </div>
-        )} 
+      )}
     </div>
   );
 }

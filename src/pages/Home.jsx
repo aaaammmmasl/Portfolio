@@ -192,7 +192,7 @@ export default function Home() {
               <motion.div
                 key={skill.name}
                 variants={item}
-                className="bg-background border-borde flex items-center justify-center p-4 border rounded-lg hover:scale-105 transition"
+                className="bg-background border-border flex items-center justify-center p-4 border rounded-lg hover:scale-105 transition"
                 style={{
                   width: 100,
                   height: 100,

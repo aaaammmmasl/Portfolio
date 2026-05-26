@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 // ICONS
 import { Eye, ArrowLeft, ExternalLink } from "lucide-react";
 // motion
@@ -8,13 +8,26 @@ import { motion, AnimatePresence } from "motion/react";
 import ShinyText from "../AnimatedComponents.jsx/ShinyText";
 
 export const Card = ({ project }) => {
+  const stopScroll = (e) => {
+    e.stopPropagation();
+  };
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isOpen, setisOpen] = useState(false);
-
+  const scrollYRef = useRef(0);
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
-    return () => (document.body.style.overflow = "auto");
+    if (isOpen) {
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "";
+    }
   }, [isOpen]);
+  const unlockScroll = () => {
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+  };
 
   const threshold = 12;
 
@@ -89,22 +102,27 @@ export const Card = ({ project }) => {
       </motion.div>
 
       {/* MODAL */}
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={unlockScroll}>
         {isOpen && (
           <motion.div
-            layoutId={project.title}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4"
+            onWheelCapture={stopScroll}
+            onTouchMoveCapture={stopScroll}
+            onScrollCapture={stopScroll}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 overflow-hidden"
           >
             {/* CARD MODAL */}
             <motion.div
+              layoutId={project.title}
               initial={{ scale: 0.9, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-2xl border border-border/40 bg-background shadow-2xl"
+              onWheelCapture={stopScroll}
+              onTouchMoveCapture={stopScroll}
+              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto overscroll-contain rounded-2xl border border-border/40 bg-background shadow-2xl"
             >
               {/* HEADER IMAGE */}
               <div className="relative h-64 w-full overflow-hidden">
