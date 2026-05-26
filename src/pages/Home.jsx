@@ -121,7 +121,7 @@ export default function Home() {
               initial={{ x: 100, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="w-full md:w-1/2 h-96"
+              className="hidden md:block w-full md:w-1/2 h-96"
             >
               <lottie-player
                 src="/pcoding.json"
@@ -152,7 +152,7 @@ export default function Home() {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-paragraph py-7 px-24 text-center max-w-6xl mx-auto"
+            className="text-paragraph py-7 px-4 md:px-24 text-left md:text-center max-w-6xl mx-auto"
           >
             I'm a passionate developer currently in my final year at private
             school groupe IKI, where I learned C# programming, database
