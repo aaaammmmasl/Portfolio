@@ -5,7 +5,7 @@ export const projects = [
     img: "/pics/studypilot.png",
     link: "https://github.com/aaaammmmasl/Student-AI-Study-Assistant",
     details:
-      "StudyPilot is a full-stack web application designed to improve the learning experience by integrating artificial intelligence into everyday study workflows. The system allows users to upload PDF files or enter text, then automatically generates summaries and interactive quizzes using an AI model via OpenRouter API. The application also supports chat-based interaction with study content, session management, and persistent message history stored in a PostgreSQL database using Prisma. The architecture follows a client-server model with a React frontend, a Node.js/Express backend, and a service layer responsible for AI processing, PDF text extraction, authentication, and data persistence. The project also includes user authentication and a structured database schema with Users, Sessions, and Messages to support multi-session learning history.",
+      "StudyPilot is a full-stack web application designed to improve the learning experience by integrating artificial intelligence into everyday study workflows. The system allows users to upload PDF files or enter text, then automatically generates summaries and interactive quizzes using an AI model via OpenRouter API. The application also supports chat-based interaction with study content, session management, and persistent message history stored in a PostgreSQL database using Prisma. The architecture follows a client-server model with a React frontend and a Node.js/Express backend. The system includes a service layer responsible for AI processing, PDF text extraction, authentication, and data persistence. The project also includes user authentication and a structured database schema with Users, Sessions, and Messages to support multi-session learning history. The application is containerized using Docker and Docker Compose to simplify development and deployment across environments.",
     features: [
       "AI-powered chat with study materials",
       "Automatic PDF text extraction",
@@ -25,8 +25,9 @@ export const projects = [
       "PostgreSQL",
       "OpenRouter API",
       "JWT Authentication",
+      "docker",
     ],
-    liveDemo: "https://student-ai-study-assistant-mvzw2ciwc-asl2.vercel.app",
-    note:"The live demo depends on external services (AI, database, etc.), which may occasionally experience downtime or limited availability."
+    liveDemo: "https://student-ai-study-assistant.vercel.app",
+    note: "The live demo depends on external services (AI, database, etc.), which may occasionally experience downtime or limited availability.",
   },
-]
+];
