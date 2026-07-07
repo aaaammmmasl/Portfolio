@@ -31,7 +31,7 @@ export const projects = [
     note: "The live demo depends on external services (AI, database, etc.), which may occasionally experience downtime or limited availability.",
   },
   {
-    title: "AWS EC2 Infrastructure with Terraform",
+    title: "Terraform AWS EC2 Docker Deployment",
     desc: "Infrastructure as Code project that provisions an AWS EC2 instance using Terraform, automatically installs Docker, and deploys an Nginx container during instance initialization.",
     img: "/pics/terraform-ec2.png",
     link: "https://github.com/aaaammmmasl/terraform-docker-ec2",
