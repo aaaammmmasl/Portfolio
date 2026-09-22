@@ -196,18 +196,14 @@ export default function Home() {
                 key={skill.name}
                 variants={item}
                 className="w-[100px] h-[100px] [perspective:1000px]"
-                onPointerEnter={(e) => {
-                  if (e.pointerType === "mouse") {
-                    setFlippedSkill(skill.name);
-                  }
+                onMouseEnter={() => {
+                  setFlippedSkill(skill.name);
                 }}
-                onPointerLeave={(e) => {
-                  if (e.pointerType === "mouse") {
-                    setFlippedSkill(null);
-                  }
+                onMouseLeave={() => {
+                  setFlippedSkill(null);
                 }}
-                onClick={(e) => {
-                  if (e.pointerType === "touch") {
+                onClick={() => {
+                  if (window.matchMedia("(hover: none)").matches) {
                     setFlippedSkill((current) =>
                       current === skill.name ? null : skill.name,
                     );
@@ -224,7 +220,7 @@ export default function Home() {
                     ease: "easeInOut",
                   }}
                 >
-                  {/* Front - Icon */}
+                  {/* Front */}
                   <div
                     className="absolute inset-0 bg-background border border-border rounded-lg
                    flex items-center justify-center
@@ -237,14 +233,17 @@ export default function Home() {
                     />
                   </div>
 
-                  {/* Back - Name */}
+                  {/* Back */}
                   <div
                     className="absolute inset-0 bg-background border border-border rounded-lg
-                   flex items-center justify-center
-                   [backface-visibility:hidden]
-                   [transform:rotateY(180deg)]"
+             flex items-center justify-center
+             [backface-visibility:hidden]
+             [transform:rotateY(180deg)]"
                   >
-                    <span className="text-sm font-semibold text-foreground text-center px-2">
+                    <span
+                      className="text-sm font-black tracking-widest
+               text-foreground text-center px-2"
+                    >
                       {skill.name}
                     </span>
                   </div>
