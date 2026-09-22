@@ -59,7 +59,7 @@ export const Card = ({ project }) => {
           <div
             onMouseMove={handleMove}
             onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-            className="bg-background border border-gray-400 rounded-xl shadow-xl overflow-hidden transition-transform duration-200 ease-out cursor-pointer max-w-120 h-auto"
+            className="bg-background border border-gray-600 rounded-xl shadow-xl overflow-hidden transition-transform duration-200 ease-out cursor-pointer max-w-120 h-auto"
             style={{
               transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
             }}

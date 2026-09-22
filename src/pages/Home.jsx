@@ -13,6 +13,8 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { GridPattern } from "@/components/ui/grid-pattern";
 
+import { useState } from "react";
+
 export default function Home() {
   const lines = [
     "Building modern",
@@ -38,6 +40,8 @@ export default function Home() {
       transition: { duration: 0.3, ease: "easeOut" },
     },
   };
+
+  const [flippedSkill, setFlippedSkill] = useState(null);
 
   return (
     <div className="pt-12 bg-background">
@@ -176,7 +180,7 @@ export default function Home() {
         />
 
         <section id="skills" className="relative z-20 lg:mt-22">
-          <h1 className=" text-foreground sm:pt-12 text-3xl font-semibold text-center">
+          <h1 className="text-foreground sm:pt-12 text-3xl font-semibold text-center">
             SKILLS
           </h1>
 
@@ -191,13 +195,60 @@ export default function Home() {
               <motion.div
                 key={skill.name}
                 variants={item}
-                className="bg-background border-border flex items-center justify-center p-4 border rounded-lg hover:scale-105 transition"
-                style={{
-                  width: 100,
-                  height: 100,
+                className="w-[100px] h-[100px] [perspective:1000px]"
+                onPointerEnter={(e) => {
+                  if (e.pointerType === "mouse") {
+                    setFlippedSkill(skill.name);
+                  }
+                }}
+                onPointerLeave={(e) => {
+                  if (e.pointerType === "mouse") {
+                    setFlippedSkill(null);
+                  }
+                }}
+                onClick={(e) => {
+                  if (e.pointerType === "touch") {
+                    setFlippedSkill((current) =>
+                      current === skill.name ? null : skill.name,
+                    );
+                  }
                 }}
               >
-                <img src={skill.icon} alt={skill.name} className="w-18 h-18" />
+                <motion.div
+                  className="relative w-full h-full [transform-style:preserve-3d]"
+                  animate={{
+                    rotateY: flippedSkill === skill.name ? 180 : 0,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    ease: "easeInOut",
+                  }}
+                >
+                  {/* Front - Icon */}
+                  <div
+                    className="absolute inset-0 bg-background border border-border rounded-lg
+                   flex items-center justify-center
+                   [backface-visibility:hidden]"
+                  >
+                    <img
+                      src={skill.icon}
+                      alt={skill.name}
+                      className="w-18 h-18"
+                    />
+                  </div>
+
+                  {/* Back - Name */}
+                  <div
+                    className="absolute inset-0 bg-background border border-border rounded-lg
+                   flex items-center justify-center
+                   [backface-visibility:hidden]
+                   [transform:rotateY(180deg)]"
+                  >
+                    <span className="text-sm font-semibold text-foreground text-center px-2">
+                      {skill.name}
+                    </span>
+                  </div>
+                </motion.div>
               </motion.div>
             ))}
           </motion.div>
