@@ -86,8 +86,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.8 }}
                 className="text-paragraph text-center md:text-left text-sm max-w-lg pt-6"
               >
-                I create responsive and interactive web applications using React
-                and Tailwind. <br />
+                I create responsive and interactive web applications. <br />
                 Currently expanding my skills in cloud technologies and system
                 design
               </motion.p>
@@ -154,7 +153,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-paragraph py-7 px-4 md:px-24 text-left md:text-center max-w-6xl mx-auto"
           >
-            I'm a passionate developer currently in my final year at private
+            I'm a passionate developer currently I finished my 2 year at private
             school groupe IKI, where I learned C# programming, database
             management, and networking fundamentals. Later, I transitioned into
             web development and learned HTML, CSS, JavaScript, and React.

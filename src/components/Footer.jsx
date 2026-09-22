@@ -4,7 +4,7 @@ export default function Footer() {
       id="contact"
       className="z-20 mt-20 flex flex-col items-center justify-around w-full pb-4 text-sm text-gray-800/70 h-full"
     >
-      <div >
+      <div>
         <div className="flex items-center mb-2 gap-2.5 flex-1">
           <div className="size-8 rounded-lg  border border-zinc-200 flex items-center justify-center">
             <svg
@@ -87,7 +87,7 @@ export default function Footer() {
 
       <div className="flex items-center gap-4 mt-8 text-indigo-500">
         <a
-          href="https://www.linkedin.com/in/amin-kerchaoui-712788296?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+          href="https://www.linkedin.com/in/amin-kerchaoui-712788296/"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:-translate-y-0.5 transition-all duration-300"
